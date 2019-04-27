@@ -7,20 +7,20 @@ _Ce projet consiste à vous faire découvrir le Théorème de récursion de Klee
 ### **Colleen**
 
 Créer un programme qui doit afficher son code source sur la sortie standard. \
-Il doit comporter: \
+Il doit comporter:
 
-- Une fonction **main**
-- **Deux** commentaires différents
-- L'un **dans la fonction main**, l'autre **en dehors** des fonctions du programme
-- Une fonction de plus que la fonction main qui devra être **appelée**
+- Une fonction **main**.
+- **Deux** commentaires différents.
+- L'un **dans la fonction main**, l'autre **en dehors** des fonctions du programme.
+- Une fonction de plus que la fonction main qui devra être **appelée**.
   
 ### **Grace**
 
 Même chose que pour le Colleen sauf que le code source doit se trouver dans ```Grace_kid.c```\
 Il doit comporter:
 
-- **Aucun** main déclaré
-- Strictement **3** define
+- **Aucun** main déclaré.
+- Strictement **3** define.
 - **Un seul** commentaire.
 
 ### **Sully**
