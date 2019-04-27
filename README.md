@@ -1,5 +1,7 @@
 # **42 Project** : dr_quine
 
+_Ce projet consiste à vous faire découvrir le Théorème de récursion de Kleene !_
+
 ## **Goal**
 
 ### **Colleen**
