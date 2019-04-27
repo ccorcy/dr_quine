@@ -1,0 +1,37 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ccorcy <ccorcy@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/04/27 20:32:28 by ccorcy            #+#    #+#              #
+#    Updated: 2019/04/27 20:51:22 by ccorcy           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+FLAGS = -Wall -Wextra -Werror
+
+SRCS = Colleen.c Grace.c Sully.c
+OBJS = $(SRCS:.c=.o)
+
+all: $(OBJS) Colleen Grace Sully
+
+Colleen:
+	gcc $(FLAGS) Colleen.o -o Colleen
+Grace:
+	gcc $(FLAGS) Grace.o -o Grace
+Sully:
+	gcc $(FLAGS) Sully.o -o Sully
+
+clean:
+	@rm -f $(OBJS)
+	@echo "Done Clean"
+
+fclean: clean
+	@rm -rf Colleen Grace Sully
+	@echo "Done fclean"
+
+re: fclean all
+
+.PHONY: all clean fclean re
