@@ -6,7 +6,7 @@
 #    By: ccorcy <ccorcy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/27 20:32:28 by ccorcy            #+#    #+#              #
-#    Updated: 2019/04/27 20:51:22 by ccorcy           ###   ########.fr        #
+#    Updated: 2019/04/28 16:08:24 by ccorcy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ clean:
 
 fclean: clean
 	@rm -rf Colleen Grace Sully
+	@rm -f Sully_*
 	@echo "Done fclean"
 
 re: fclean all
