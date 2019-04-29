@@ -1,23 +1,22 @@
-SRCS = Colleen.s
-OBJS = $(SRCS:.s=.o)
+FILES = Colleen/Colleen.o
+SRCS = Colleen/Colleen.s
+BIN = Colleen/Colleen
 
-all: $(OBJS) Colleen
+all: $(BIN)
 
-Colleen: Colleen.o
-	ld Colleen.o -macosx_version_min 10.8 -lSystem -o $@
+$(BIN):
+	nasm -f macho64 $(SRCS)
+	ld $(FILES) -lSystem -macosx_version_min 12.2 -o Colleen/Colleen
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(FILES)
 	@echo "Done clean"
 
 fclean: clean
-	@rm -f Colleen Grace Sully
+	@rm -f Colleen/Colleen Grace Sully
 	@echo "Done fclean"
 
 re: fclean all
 
-%.o: %.s
-	nasm -f macho64 $<
-	@echo $< " -> " $@
 
 .PHONY: all fclean clean re
