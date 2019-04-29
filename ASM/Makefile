@@ -3,8 +3,8 @@ OBJS = $(SRCS:.s=.o)
 
 all: $(OBJS) Colleen
 
-Colleen:
-	@ld -macosx_version_min 10.7.0 -e main -lSystem -o Colleen Colleen.o
+Colleen: Colleen.o
+	ld Colleen.o -e main -macosx_version_min 10.8 -lSystem -o $@
 
 clean:
 	@rm -f $(OBJS)
@@ -17,7 +17,7 @@ fclean: clean
 re: fclean all
 
 %.o: %.s
-	@nasm -f macho64 $<
+	nasm -f macho64 $<
 	@echo $< " -> " $@
 
 .PHONY: all fclean clean re
