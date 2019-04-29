@@ -4,7 +4,7 @@ OBJS = $(SRCS:.s=.o)
 all: $(OBJS) Colleen
 
 Colleen: Colleen.o
-	ld Colleen.o -e main -macosx_version_min 10.8 -lSystem -o $@
+	ld Colleen.o -macosx_version_min 10.8 -lSystem -o $@
 
 clean:
 	@rm -f $(OBJS)
