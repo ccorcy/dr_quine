@@ -2,6 +2,8 @@ section .data
 data db "section .data%cdata db %c%s%c, 0%ccompile db %cnasm -f macho64 Sully_%cd.s && ld -lSystem -macosx_version_min 10.12 -o Sully_%cd Sully_%cd.o && rm -f Sully_*.o%c, 0%cexec db %c./Sully_%cd%c, 0%cfilename db %cSully_%cd.s%c, 0%csection .text%cglobal _start%cglobal _main%cextern _sprintf%cextern _dprintf%cextern _malloc%cextern _free%cextern _system%c_start:%c_main:%cpush rbp%cmov rbp, rsp%cmov r14, %d%cmov r15, r14%cdec r15%ccmp r14, 0%cjl return%cmov rdi, 10%ccall _malloc%cmov r13, rax%cmov rdi, r13%clea rsi, [rel filename]%cmov rdx, r14%ccall _sprintf%cmov rdi, r13%cmov rsi, 1537%cmov rdx, 420%cmov rax, 0x2000005%csyscall%cmov r12, rax%cmov rdi, r13%ccall _free%cmov rcx, 0%cloop_char:%cpush 10%cinc rcx%ccmp rcx, 102%cje done%cjmp loop_char%cdone:%cadd dword [rsp + 8], 24%cadd dword [rsp + 16], 27%cadd dword [rsp + 24], 27%cadd dword [rsp + 32], 27%cadd dword [rsp + 40], 24%cadd dword [rsp + 56], 24%cadd dword [rsp + 64], 27%cadd dword [rsp + 72], 24%cadd dword [rsp + 88], 24%cadd dword [rsp + 96], 27%cadd dword [rsp + 104], 24%cmov qword [rsp + 216], r15%cmov rdi, r12%clea rsi, [rel data]%cmov rdx, 10%cmov rcx, 34%clea r8, [rel data]%cmov r9, 34%ccall _dprintf%cmov rdi, r12%cmov rax, 0x0000006%csyscall%cmov rdi, 100%ccall _malloc%cmov r13, rax%cmov rdi, r13%clea rsi, [rel compile]%cmov rdx, r14%cmov rcx, r14%cmov r8, r14%ccall _sprintf%cmov rdi, r13%ccall _system%cmov rdi, r13%ccall _free%ccmp r14, 0%cjle return%cmov rdi, r13%clea rsi, [rel exec]%cmov rdx, r14%ccall _sprintf%cmov rdi, r13%clea rsi, [rel exec]%ccall _system%creturn:%cleave%cret", 0
 compile db "nasm -f macho64 Sully_%d.s && ld -lSystem -macosx_version_min 10.12 -o Sully_%d Sully_%d.o && rm -f Sully_*.o", 0
 exec db "./Sully_%d", 0
+envcmp db "Sully_", 0
+envcheck db "_", 0
 filename db "Sully_%d.s", 0
 section .text
 global _start
@@ -9,15 +11,28 @@ global _main
 extern _sprintf
 extern _dprintf
 extern _malloc
+extern _getenv
+extern _strstr
+extern _puts
 extern _free
 extern _system
 _start:
 _main:
 push rbp
 mov rbp, rsp
+lea	rdi, [rel envcheck]
+call _getenv
+mov r12, rax
+mov rdi, r12
+lea rsi, [rel envcmp]
+call _strstr
+mov r12, rax
 mov r14, 5
 mov r15, r14
+cmp r12, 0
+je not_dec
 dec r15
+not_dec:
 cmp r14, 0
 jl return
 mov rdi, 10
@@ -75,7 +90,7 @@ mov rcx, r14
 mov r8, r14
 call _sprintf
 mov rdi, r13
-call _system
+; call _system
 mov rdi, r13
 call _free
 cmp r14, 0
@@ -86,7 +101,7 @@ mov rdx, r14
 call _sprintf
 mov rdi, r13
 lea rsi, [rel exec]
-call _system
+; call _system
 return:
 leave
 ret
